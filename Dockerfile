@@ -8,8 +8,14 @@ RUN  apk update \
 EXPOSE 389
 EXPOSE 636
 
+WORKDIR /root
+RUN cp /etc/openldap/slapd.conf . \
+  && echo "include /etc/openldap/schema/cosine.schema" >> slapd.conf \
+  && echo "include /etc/openldap/schema/inetorgperson.schema" >> slapd.conf \
+  && echo "include /etc/openldap/schema/nis.schema" >> slapd.conf
+
 RUN mkdir /etc/openldap/slapd.d \
-  && slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d \
+  && slaptest -f slapd.conf -F /etc/openldap/slapd.d \
   || chown -R ldap:ldap /etc/openldap/slapd.d \
   && chmod -R 000 /etc/openldap/slapd.d \
   && chmod -R u+rwX /etc/openldap/slapd.d \
