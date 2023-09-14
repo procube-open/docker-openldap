@@ -1,7 +1,7 @@
-FROM alpine:3.10
+FROM alpine:3.18
 
 RUN  apk update \
-  && apk add gettext openldap openldap-clients openldap-back-mdb openldap-passwd-pbkdf2 openldap-overlay-memberof openldap-overlay-ppolicy openldap-overlay-refint supervisor \
+  && apk add gettext openldap openldap-clients openldap-back-mdb openldap-passwd-pbkdf2 openldap-overlay-memberof openldap-overlay-ppolicy openldap-overlay-refint supervisor openssl openldap-passwd-sha2 \
   && rm -rf /var/cache/apk/* \
   && mkdir -p /ldap
 
@@ -10,6 +10,7 @@ EXPOSE 636
 
 WORKDIR /root
 RUN cp /etc/openldap/slapd.conf . \
+  && echo "moduleload pw-sha2.so" >> slapd.conf \
   && echo "include /etc/openldap/schema/cosine.schema" >> slapd.conf \
   && echo "include /etc/openldap/schema/inetorgperson.schema" >> slapd.conf \
   && echo "include /etc/openldap/schema/nis.schema" >> slapd.conf
