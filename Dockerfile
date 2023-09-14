@@ -24,7 +24,7 @@ RUN mkdir /etc/openldap/slapd.d \
   && mkdir /var/lib/openldap/run \
   && chown ldap:ldap /var/lib/openldap/run
 
-COPY start-slapd.sh /var/lib/openldap/start-salpd.sh
+COPY start-slapd.sh /var/lib/openldap/start-slapd.sh
 COPY restore.sh /var/lib/openldap/restore.sh
 COPY restore-config.sh /var/lib/openldap/restore-config.sh
 RUN chmod +x /var/lib/openldap/*.sh
