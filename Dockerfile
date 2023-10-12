@@ -10,10 +10,7 @@ EXPOSE 636
 
 WORKDIR /root
 RUN cp /etc/openldap/slapd.conf . \
-  && echo "moduleload pw-sha2.so" >> slapd.conf \
-  && echo "include /etc/openldap/schema/cosine.schema" >> slapd.conf \
-  && echo "include /etc/openldap/schema/inetorgperson.schema" >> slapd.conf \
-  && echo "include /etc/openldap/schema/nis.schema" >> slapd.conf
+  && echo "moduleload pw-sha2.so" >> slapd.conf
 
 RUN mkdir /etc/openldap/slapd.d \
   && slaptest -f slapd.conf -F /etc/openldap/slapd.d \
