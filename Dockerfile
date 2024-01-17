@@ -1,7 +1,7 @@
 FROM alpine:3.18
 
 RUN  apk update \
-  && apk add gettext openldap openldap-clients openldap-back-mdb openldap-passwd-pbkdf2 openldap-overlay-memberof openldap-overlay-ppolicy openldap-overlay-refint supervisor openssl openldap-passwd-sha2 \
+  && apk add gettext openldap openldap-clients openldap-back-mdb openldap-passwd-pbkdf2 openldap-overlay-memberof openldap-overlay-ppolicy openldap-overlay-refint supervisor openssl openldap-passwd-sha2 openldap-passwd-argon2 \
   && rm -rf /var/cache/apk/* \
   && mkdir -p /ldap
 
